@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const sanitizeHtml = require('sanitize-html');
 const app = express();
 
 app.use(express());
@@ -47,7 +48,7 @@ app.get("/doc/:iddocs", (req, res) => {
 app.post("/postdoc", (req, res) => {
   const sql = "INSERT INTO docs(`title`,`content`) VALUES (?)";
 
-  const values = [req.body.title, req.body.content];
+  const values = [req.body.title, sanitizeHtml(req.body.content)];
 
   db.query(sql, [values], (err, data) => {
     if (err) {
