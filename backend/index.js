@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const sanitizeHtml = require('sanitize-html');
+const sanitizeHtml = require("sanitize-html");
 const app = express();
 
 app.use(express());
@@ -23,27 +23,25 @@ app.get("/", (req, res) => {
 });
 
 app.get("/doc/:iddocs", (req, res) => {
-    const { iddocs } = req.params;
-    const sql = "SELECT content FROM docs WHERE iddocs = ?";
-  
-    db.query(sql, [iddocs], (err, result) => {
-        if (err) {
-            console.error("Error getting the data", err);
-            return res.status(500).json({ error: "Internal Server Error" });
-        }
-  
-        if (result.length === 0) {
-            return res.status(404).json({ error: "Document not found" });
-        }
-  
-        const { content } = result[0];
-  
-        console.log("Data Fetched Successfully");
-        res.status(200).json({ content });
-    });
-});
+  const { iddocs } = req.params;
+  const sql = "SELECT content FROM docs WHERE iddocs = ?";
 
-  
+  db.query(sql, [iddocs], (err, result) => {
+    if (err) {
+      console.error("Error getting the data", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+
+    const { content } = result[0];
+
+    console.log("Data Fetched Successfully");
+    res.status(200).json({ content });
+  });
+});
 
 app.post("/postdoc", (req, res) => {
   const sql = "INSERT INTO docs(`title`,`content`) VALUES (?)";

@@ -2,6 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const style = {
   position: "absolute",
@@ -19,8 +21,26 @@ export default function ModalComponent({ open, setOpen,title,setTitle }) {
   const handleClose = () => setOpen(false);
 
   const addData=async()=>{
-    const res=await axios.post("http://localhost:4000/postdoc",{title});
-    console.log(res.data)
+    try {
+      const res = await axios.post("http://localhost:4000/postdoc", { title });
+      console.log(res.status);
+  
+      // Check if the data was added successfully
+      if (res.status === 200) {
+        // Show success toast message
+        toast.success("Data added successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000, // Adjust the duration as needed
+        });
+      } else {
+        // Handle other response statuses if necessary
+        toast.error("Failed to add data. Please try again.");
+      }
+    } catch (error) {
+      // Handle error if the request fails
+      console.error("Error adding data:", error);
+      toast.error("An error occurred. Please try again later.");
+    }
   }
 
   return (
@@ -34,7 +54,7 @@ export default function ModalComponent({ open, setOpen,title,setTitle }) {
         <Box sx={style}>
           <input placeholder="Enter the title" className="add-input" value={title} onChange={(e)=>setTitle(e.target.value)}/>
           <div className="button-container">
-            <button className="add-docs" onClick={addData}>Add Document</button>
+            <button className="single-button" onClick={addData}>Add Document</button>
           </div>
         </Box>
       </Modal>

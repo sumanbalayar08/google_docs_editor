@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Editor = () => {
-
   const { iddocs: documentId } = useParams();
   const [value, setValue] = useState("");
 
@@ -15,19 +14,22 @@ const Editor = () => {
       // Set the value to the data received from the server
       //setValue(res.data);
       console.log(res);
+      setValue(res.data.content);
     } catch (error) {
       console.log("Internal Server Error", error);
     }
   };
 
   useEffect(() => {
+    console.log("hello");
     getData();
   }, []);
 
   useEffect(() => {
     // This function will be called after 5 seconds of inactivity
-    console.log(documentId)
     const updateDocument = async () => {
+      console.log(documentId);
+
       try {
         const res = await axios.put(
           `http://localhost:4000/update/${documentId}`,
@@ -48,12 +50,17 @@ const Editor = () => {
     return () => clearTimeout(timeoutId);
   }, [value, documentId]);
 
-
   const handleChange = (content) => {
     setValue(content);
   };
 
-  return <ReactQuill theme="snow" value={value} onChange={handleChange} />;
+  return (
+    <div className="editor">
+      <p>Google Docs Editor Clone Using Node and SQL</p>
+
+      <ReactQuill theme="snow" value={value} onChange={handleChange} className="quill-editor" />
+    </div>
+  );
 };
 
 export default Editor;
