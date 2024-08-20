@@ -27,22 +27,29 @@ export default function Docs() {
     <div className="docs-main">
       <div className="docs-single-1">
         <div>Start a New Document</div>
-        <button className="add-docs" onClick={handleOpen}>
-          Add a Document
-        </button>
+        <div className="add-docs-main">
+          <button className="add-docs" onClick={handleOpen}>
+            <img src="/images/add.png"/>
+          </button>
+          <span id="blank">Blank Document</span>
+        </div>
       </div>
 
       <div className="docs-single-2">
-        <div>Recent Documents</div>
+        <div className="recent-title">Recent Documents</div>
         <div className="grid-main">
-          {data.map((dat, id) => {
-            return (
-              <Link to={`/doc/${dat.iddocs}`} className="grid-single">
-                <p>{dat.title}</p>
-                <p>{dat.content}</p>
-              </Link>
-            );
-          })}
+          {data && data.length > 0 ? (
+            data.map((dat, id) => {
+              return (
+                <Link to={`/doc/${dat.iddocs}`} className="grid-single">
+                  <p>{dat.title}</p>
+                  <p>{dat.content}</p>
+                </Link>
+              );
+            })
+          ) : (
+            <p>No documents Available Right Now</p>
+          )}
         </div>
       </div>
 

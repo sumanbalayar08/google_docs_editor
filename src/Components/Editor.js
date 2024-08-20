@@ -56,9 +56,16 @@ const Editor = () => {
 
   return (
     <div className="editor">
-      <p>Google Docs Editor Clone Using Node and SQL</p>
+      <div className="editor-title">
+        Google Docs Editor Clone Using Node and SQL
+      </div>
 
-      <ReactQuill theme="snow" value={value} onChange={handleChange} className="quill-editor" />
+      <ReactQuill
+        theme="snow"
+        value={value}
+        onChange={handleChange}
+        className="quill-editor"
+      />
     </div>
   );
 };

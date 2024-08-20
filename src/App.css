@@ -1,36 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-.docs-main{
-
-}
+.docs-main {}
 
 .docs-single-1 {
   display: flex;
   flex-direction: column;
   text-align: start;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-bottom: 20px;
-  background: #c9c6c6;
+  gap: 20px;
+  padding: 2% 20%;
+  background: #ecebeb;
 }
 
 .docs-single-2 {
   display: flex;
   flex-direction: column;
   text-align: start;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-bottom: 20px;
+  padding: 2% 20%;
   background: #ffffff;
+}
+
+.recent-title {
+  font-size: larger;
+  font-weight: 800;
+}
+
+#blank{
+  font-size: medium;
+  font-weight: 500;
 }
 
 .add-docs {
   height: 200px;
   width: 150px;
   background-color: #ffffff;
-  border:black;
+  border: black;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
+}
+
+.add-docs-main{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
 }
 
 .add-input {
@@ -47,71 +59,78 @@
   text-align: center;
 }
 
-.grid-main{
+.grid-main {
   display: flex;
   gap: 20px;
   justify-content: center;
 }
 
-.grid-single{
-height: 200px;
-width: 150px;
-cursor: pointer;
-background-color: #beb8b8;
-width: 200px;
-padding: 10px;
-color: rgb(0, 0, 0);
+.grid-single {
+  height: 200px;
+  width: 150px;
+  cursor: pointer;
+  background-color: #beb8b8;
+  width: 200px;
+  padding: 10px;
+  color: rgb(0, 0, 0);
 }
 
 .editor{
   display: flex;
-  grid-template-columns: auto auto auto auto;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 800px;
+  text-align: center;
+  padding: 2% 2%;
+  gap: 20px;
 }
 
-.navbar-main{
-  background: rgb(241, 237, 241);
+.editor-title{
+  font-size: xx-large;
+  font-weight: 600;
+  font-family: 'Bebas Neue', sans-serif;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.quill-editor{
+  height: 450px;
+}
+
+.navbar-main {
+  background: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
   padding-left: 10px;
 
-.input-align{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .input-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .input-box{
-    width: 400px ;
-    height: 20px;
-    border-radius: 6px;
-    padding-left: 30px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background: #e2dfdf;
-    position: relative;
+    .input-box {
+      width: 400px;
+      height: 20px;
+      border-radius: 6px;
+      padding-left: 30px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      background: #e2dfdf;
+      position: relative;
+    }
+
+    .icon-container {
+      position: absolute;
+      z-index: 20;
+      margin-right: 398px;
+    }
   }
-  
-  .icon-container{
-    position:absolute;
-    z-index: 20;
-    margin-right: 398px;
-  }
+
 }
 
-}
-
-.single-button{
+.single-button {
   background: #ec9c06;
   padding: 8px;
   cursor: pointer;
 }
 
-.quill-editor{
-width: 500px;
-height: 400px;
-}
