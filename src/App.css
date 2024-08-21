@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-.docs-main {}
 
 .docs-single-1 {
   display: flex;
@@ -9,6 +8,11 @@
   gap: 20px;
   padding: 2% 20%;
   background: #ecebeb;
+}
+
+.home-title{
+text-decoration: none;
+color: black;
 }
 
 .docs-single-2 {
@@ -108,31 +112,36 @@
   align-items: center;
   padding-right: 10px;
   padding-left: 10px;
-
-  .input-align {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+}
+    .input-align {
+      display: flex;
+      align-items: center;
+      position: relative;
+      /* Make sure the container is positioned relative for absolute positioning of icon */
+    }
+  
     .input-box {
       width: 400px;
       height: 20px;
+      /* Adjust height for better alignment */
       border-radius: 6px;
-      padding-left: 30px;
+      padding-left: 40px;
+      /* Add padding to account for the icon's width */
       padding-top: 8px;
       padding-bottom: 8px;
       background: #e2dfdf;
       position: relative;
     }
-
+  
     .icon-container {
       position: absolute;
-      z-index: 20;
-      margin-right: 398px;
+      left: 10px;
+      /* Adjust according to your layout needs */
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      /* Ensure icon is above the input box */
     }
-  }
-
-}
 
 .single-button {
   background: #ec9c06;
@@ -163,4 +172,28 @@ line-height: 1.5;
   /* Green color for "Saved" */
   transition: opacity 0.5s ease-in-out;
   opacity: 1;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
 }

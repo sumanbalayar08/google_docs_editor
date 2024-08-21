@@ -43,6 +43,23 @@ app.get("/doc/:iddocs", (req, res) => {
   });
 });
 
+app.get("/search", (req, res) => {
+  const searchTerm = req.query.term || ''; // Get the search term from query parameters
+  console.log(searchTerm);
+  const sql = "SELECT * FROM docs WHERE title LIKE ?";
+  const values = [`%${searchTerm}%`]; // Use wildcard for partial matching
+
+  db.query(sql, values, (err, data) => {
+    if (err) {
+      console.error("Error getting the data", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    console.log("Data Fetched Successfully");
+    res.status(200).json(data);
+  });
+});
+
+
 app.post("/postdoc", (req, res) => {
   const sql = "INSERT INTO docs(`title`,`content`) VALUES (?, ?)";
   const values = [req.body.title, sanitizeHtml(req.body.content)];
