@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
+
 
 export default function Docs() {
   const [data, setData] = useState([]);
@@ -9,11 +11,12 @@ export default function Docs() {
   const [title, setTitle] = useState("");
 
   useEffect(() => {
+    console.log("hello")
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/");
         setData(response.data);
-        console.log(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -42,8 +45,13 @@ export default function Docs() {
             data.map((dat, id) => {
               return (
                 <Link to={`/doc/${dat.iddocs}`} className="grid-single">
-                  <p>{dat.title}</p>
-                  <p>{dat.content}</p>
+                  <p id="doc-title">{dat.title}</p>
+                  <p
+                id="doc-content"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(dat.content),
+                }}
+              />
                 </Link>
               );
             })

@@ -44,18 +44,18 @@ app.get("/doc/:iddocs", (req, res) => {
 });
 
 app.post("/postdoc", (req, res) => {
-  const sql = "INSERT INTO docs(`title`,`content`) VALUES (?)";
-
+  const sql = "INSERT INTO docs(`title`,`content`) VALUES (?, ?)";
   const values = [req.body.title, sanitizeHtml(req.body.content)];
 
-  db.query(sql, [values], (err, data) => {
+  db.query(sql, values, (err, result) => {
     if (err) {
       console.error("Error saving data to the database:", err);
       return res.status(500).json({ error: "Internal Server Error" });
     }
 
-    console.log("Data saved to database");
-    res.status(200).json({ message: "Data saved successfully" });
+    const newId = result.insertId; // Get the id of the inserted row
+    console.log("Data saved to database with id:", newId);
+    res.status(200).json({ message: "Data saved successfully", iddocs: newId });
   });
 });
 
@@ -72,7 +72,7 @@ app.put("/update/:iddocs", (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
       return;
     }
-    res.json({ message: "Document updated successfully" });
+    res.status(200).json({ message: "Document updated successfully" });
   });
 });
 

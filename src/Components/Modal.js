@@ -1,9 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const style = {
   position: "absolute",
@@ -17,7 +16,9 @@ const style = {
   p: 5,
 };
 
-export default function ModalComponent({ open, setOpen,title,setTitle }) {
+export default function ModalComponent({ open, setOpen, title, setTitle }) {
+  
+  const navigate = useNavigate();
   const handleClose = () => setOpen(false);
 
   const addData=async()=>{
@@ -27,11 +28,8 @@ export default function ModalComponent({ open, setOpen,title,setTitle }) {
   
       // Check if the data was added successfully
       if (res.status === 200) {
-        // Show success toast message
-        toast.success("Data added successfully!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000, // Adjust the duration as needed
-        });
+        const newId = res.data.iddocs;
+         navigate(`/doc/${newId}`);
       } else {
         // Handle other response statuses if necessary
         toast.error("Failed to add data. Please try again.");

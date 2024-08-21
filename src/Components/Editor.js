@@ -7,6 +7,8 @@ import axios from "axios";
 const Editor = () => {
   const { iddocs: documentId } = useParams();
   const [value, setValue] = useState("");
+  const [isSaving, SetisSaving] = useState(false);
+  const [isSaved, SetisSaved] = useState(false);
 
   const getData = async () => {
     try {
@@ -29,6 +31,8 @@ const Editor = () => {
     // This function will be called after 5 seconds of inactivity
     const updateDocument = async () => {
       console.log(documentId);
+      SetisSaving(true);
+      SetisSaved(false);
 
       try {
         const res = await axios.put(
@@ -37,6 +41,10 @@ const Editor = () => {
             content: value,
           }
         );
+        if (res.status == 200) {
+          SetisSaving(false);
+          SetisSaved(true);
+        }
         console.log("Document updated:", value);
       } catch (error) {
         console.error("Error updating document:", error);
@@ -58,6 +66,10 @@ const Editor = () => {
     <div className="editor">
       <div className="editor-title">
         Google Docs Editor Clone Using Node and SQL
+        <div className="saving-status">
+          <img src="/images/cloud.png" width={30} alt="cloud"/>
+          {isSaving ? "Saving..." : isSaved ? "Saved" : ""}
+        </div>
       </div>
 
       <ReactQuill
